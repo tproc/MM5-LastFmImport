@@ -5,6 +5,6 @@
     "long-description": "Attempting to port the MM3/4 Last.FM Import extension developed by Psykar to MM5 javascript",
     "version": "1.0.0",
     "type": "sync",
-    "author": "https://github.com/tproc",
+    "author": "https://github.com/tproc/MM5-LastFmImport",
     "icon": "last-fm.svg"
 }
