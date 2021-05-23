@@ -1,0 +1,10 @@
+{
+    "title": "Last.FM Import",
+    "id": "lastFmImport",
+    "description": "Import track plays from Last.FM",
+    "long-description": "Attempting to port the MM3/4 Last.FM Import extension developed by Psykar to MM5 javascript",
+    "version": "1.0.0",
+    "type": "sync",
+    "author": "https://github.com/tproc",
+    "icon": "last-fm.svg"
+}
