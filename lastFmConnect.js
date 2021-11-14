@@ -7,16 +7,17 @@ const makeHTTPRequestGET = function (url) {
         
         var doneCallback = function (status, responseText) {
             if (status === 200) {
-                try {
+                var pageResponseFile = app.filesystem.getDataFolder() + 'Scripts\\LastFmImport\\page.txt';
+                app.filesystem.saveTextToFileAsync(pageResponseFile, responseText, {
+                    append: false
+                }).then(() => {
                     var resObj = JSON.parse(responseText);
                     if ((resObj !== undefined) && isObjectLiteral(resObj)) {
                         resolve(resObj);
                     } else {
                         reject('last.fm makeHTTPRequest error status ' + status + ': ' + responseText);
                     }
-                } catch(err) {
-                    reject(err);
-                }
+                });
             } else {
                 reject('last.fm makeHTTPRequest error status ' + status + ': ' + responseText);
             }
@@ -41,8 +42,7 @@ const sendLastFmRequest = function (rootUrl, params) {
 
     // prepare whole query
     var query = rootUrl + '?';
-    var httpReqFunc = makeHTTPRequestGET;
-
+    
     forEach(params, function (paramPair, idx) {
         if (idx > 0) {
             query += '&';
@@ -50,7 +50,7 @@ const sendLastFmRequest = function (rootUrl, params) {
         query += paramPair[0] + '=' + encodeURIComponent(paramPair[1]);
     });
     ODS('last.fm: going to send: ' + query);
-    return localPromise(httpReqFunc(query));
+    return localPromise(makeHTTPRequestGET(query));
 };
 
 function getRecentTracksPage(page, importProcess) {
@@ -59,6 +59,7 @@ function getRecentTracksPage(page, importProcess) {
             ['method', 'user.getRecentTracks'], 
             ['user', importProcess.username], 
             ['api_key', importProcess.apiKey], 
+            ['limit', ('' + importProcess.pageSize)], 
             ['format', 'json'], 
             ['page', pageStr]
     ]);

@@ -18,7 +18,6 @@ The default date for earliest scrobble to import is 1/1/2000. Each time the impo
 * Fuzzy/configurable search of MM DB for matching tracks, for example
     * Handle missing/misplaced 'the' in artist name
     * Remove things "feat. X" and "2001 remaster" to compare track names
-* Configurable page size - using current default of 50, max is 200
-* Configurable number of pages to return, currently fixed at 10
+* Configurable page size - using 35, default is 50, max is 200
 * Is the performance bad because I'm not great at Javascript? Or is it just going to be slow?
 * Username override setting? Maybe they haven't logged in or want to import a different user.
